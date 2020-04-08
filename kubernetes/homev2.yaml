@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistants
+spec:
+  selector:
+    matchLabels:
+      app: home
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: home
+    spec:
+      containers:
+      - name: home-assistants
+        image: homeassistant/home-assistant:stable
+        ports:
+        - containerPort: 8123
+      nodeSelector:
+        aiot: "endpoint"
