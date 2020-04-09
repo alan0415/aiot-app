@@ -14,8 +14,16 @@ spec:
     spec:
       containers:
       - name: home-assistants
-        image: homeassistant/home-assistant:stable
+        image: homeassistant/raspberrypi3-homeassistant:stable
+        volumeMounts:
+        - mountPath: /config
+          name: ha-config
         ports:
         - containerPort: 8123
+      volumes:
+      - name: ha-config
+        hostPath: 
+          path: /usr/share/hassio
+          type: Directory
       nodeSelector:
-        aiot: "endpoint"
+        node: "master-rpi"
